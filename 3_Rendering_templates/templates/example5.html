@@ -1,0 +1,18 @@
+{% extends "inheritance.html" %}
+
+
+{% block head %}
+<title>Example 5</title>
+{% endblock %}
+
+
+<!-- Syntax -->
+{% block body %}
+<p> Where do you want to go?</p>
+
+{% for page in pages %}
+
+<a href="{{ page }}">{{ page }}</a>
+
+{% endfor %}
+{% endblock %}

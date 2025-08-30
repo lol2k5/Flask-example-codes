@@ -1,0 +1,24 @@
+{% extends "inheritance.html" %}
+
+
+{% block head %}
+<title>Example 4</title>
+{% endblock %}
+
+
+<!-- Syntax -->
+{% block body %}
+{% if password == None %}
+
+<p>Please give me the password!</p>
+
+{% elif password == "s3cret" %}
+
+<p>Right password</p>
+
+{% else %}
+
+<p>Wrong password, your input: {{ password }}</p>
+
+{% endif %}
+{% endblock %}

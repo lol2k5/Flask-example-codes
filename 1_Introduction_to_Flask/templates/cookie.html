@@ -1,0 +1,27 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{url_for('static', filename='style.css')}}" />
+    <title>cookie</title>
+</head>
+
+<body>
+    <form action="/setcookie" method="post">
+        <label>Enter cookie:</label>
+        <input type="text" name="cookie" required />
+        <br /> <br />
+
+        <input type="submit" value="Enter" />
+    </form>
+
+    <br /> <br />
+
+    <button id="get_cookie">Click here to get cookie!</button>
+    <br /> <br />
+    <h1 id="show_cookie"></h1>
+    <script type="text/javascript" src="{{url_for('static', filename='script.js')}}"></script>
+</body>
+
+</html>

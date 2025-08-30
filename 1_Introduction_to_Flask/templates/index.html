@@ -1,0 +1,24 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{url_for('static', filename='style.css')}}" />
+    <!-- 
+        Chèn file style.css vào trang thông qua template,
+        template cho phép ta chạy code pythonpython bên trong.  
+    -->
+    <title>test</title>
+</head>
+
+<body>
+    <h1>This is a test file</h1>
+    <p>
+        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Maxime dolores tenetur sequi iusto at nam officia et,
+        facere dolor laborum sed, iste dignissimos nesciunt eius sapiente, quae deserunt debitis distinctio.
+    </p>
+    <button id="alert_button">Press me</button>
+    <script type="text/javascript" src="{{url_for('static', filename='script.js')}}"></script>
+</body>
+
+</html>

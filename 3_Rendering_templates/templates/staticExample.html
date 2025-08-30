@@ -1,0 +1,20 @@
+{% extends "inheritance.html" %}
+
+
+{% block head %}
+<title>Static example </title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+{% endblock %}
+
+
+{% block body %}
+<h1>Test test test</h1>
+<p>CSS change the above line</p>
+
+<br /><br />
+
+<p id="test"></p>
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+<script>write_Lorem();</script>
+<p>JS code add above line</p>
+{% endblock %}

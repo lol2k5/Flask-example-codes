@@ -1,0 +1,20 @@
+{% extends "inheritance.html" %}
+<!-- Kế thừa từ inheritance.html -->
+
+
+{% block head %}
+<title>Example 3</title>
+{% endblock %}
+<!-- 
+    Phần block head được ghi tại đây sẽ được ghi 
+    đè lên phần head của inheritance.html 
+-->
+
+
+{% block body %}
+<h1>This is example 3</h1>
+<a href="{{ url_for('example_2') }}">Go to example2</a>
+{% endblock %}
+<!--
+    Tương tự với block body
+-->
