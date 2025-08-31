@@ -18,7 +18,8 @@ app.config.from_file("config.py")
 # Hoặc là lấy trực tiếp giá trị từ các biến môi trường 
 # trong hệ điều hành
 app.config["ENV"] = environ.get('default_key')
-
+# Trước khi chạy ứng dụng thì trong shell có chạy:
+# export default_key='abcxyz'
 
 # Có rất nhiều tùy chỉnh theo điều khiển nhiều thứ khác 
 # nhau trong 1 ứng dụng và chúng có thể bao gồm:
