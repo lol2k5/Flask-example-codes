@@ -10,7 +10,7 @@ const escapeHtml = str => {
 };
 
 const initialization = async () => {
-    let resp = await fetch("http://192.168.2.3/notes");
+    let resp = await fetch("http://192.168.2.3/notes"); // Chỉnh theo địa chỉ ip và cổng
     let data = await resp.json();
 
     let table_body = document.getElementById("notes_body");
@@ -32,7 +32,7 @@ const initialization = async () => {
             let id = button.getAttribute("data-id");
             await fetch(`http://192.168.2.3/notes/${encodeURIComponent(id)}`, {
                 method: "DELETE"
-            });
+            }); // Chỉnh theo địa chỉ ip và cổng
             button.closest("tr").remove();
         });
     });

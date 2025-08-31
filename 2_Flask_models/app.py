@@ -59,7 +59,7 @@ def delete_note(id: int) -> None:
     # Thêm nó vào danh sách xóa
     db.session.delete(note_need_to_delete)
 
-    # Xóa nó điđi
+    # Xóa nó đi
     db.session.commit()
 
 
@@ -107,13 +107,17 @@ def index() -> str:
     return render_template("index.html")
 
 
-# Chạy ứng dụng
-if __name__ == "__main__":
-    # Tạo database tương ứng
+# Hàm tạo bảng
+# vì nếu chạy với flask thay vì python3 dòng lệnh dưới
+# if __name__ == __main__: sẽ không bao giờ được chạychạy
+@app.cli.command("init-db")
+def init_db():
     with app.app_context():
         db.create_all()
 
-    # Chạy app
-    app.run(debug=True)
-    # flask --app app.py run --host=địa_chỉ_ip --port=cổng_ảo
-    # Nhớ chỉnh script theo host và port
+# flask --app app.py init-db
+# flask --app app.py run --host=địa_chỉ_ip --port=cổng_ảo
+# Lệnh đầu tiên là dùng để tạo cơ sở dữ liệu, lệnh sau để chạy 
+# ứng dụng
+# Nhớ chỉnh script.js, đoạn chứa địa chỉ ip và cổng để gọi api
+# theo host và port

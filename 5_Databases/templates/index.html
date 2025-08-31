@@ -1,0 +1,52 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./static/style.css">
+    <title>Note</title>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Note Taker</h1>
+
+        <div class="add_note">
+            <h2>Add a new Note</h2>
+            <form action="/" method="POST">
+                <label for="content">Description</label>
+                <textarea name="content" id="content" rows="5" placeholder="Write your content here..."
+                    required></textarea>
+                <br /><br />
+
+                <input type="submit" value="Add note" />
+                <br /><br />
+            </form>
+        </div>
+
+        <div class="notes_table">
+            <h2>List of Notes</h2>
+            <table id="notes">
+                <thead id="notes_head">
+                    <th class="col-id">Id</th>
+                    <th class="col-content">Content</th>
+                    <th class="col-date">Date & Time</th>
+                    <th class="col-action">Action</th>
+                </thead>
+                <tbody id="notes_body">
+                    {% for note in notes %}
+                    <tr>
+                        <td>{{ note.id }}</td>
+                        <td>{{ note.info }}</td>
+                        <td>{{ note.date }}</td>
+                        <td><button class="del-btn" data-id="{{ note.id }}">Delete</button></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <script src="./static/script.js"></script>
+</body>
+
+</html>
