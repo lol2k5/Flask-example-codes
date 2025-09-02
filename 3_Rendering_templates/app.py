@@ -58,3 +58,4 @@ def static_example() -> str:
 
 if __name__ == "__main__":
     app.run(debug=True)
+    # python.exe app.py

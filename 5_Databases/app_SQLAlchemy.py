@@ -4,10 +4,11 @@
 # với các csdl như SQLite, PostgreSQL, MongoDB, ...
 
 # Ta lấy mã nguồn từ thư mục 2_Flask_models để demo cũng
-# như nói 1 chút về cách ta sẽ tương tác với SQLAlchemy
+# như nói sâu hơn về cách ta sẽ tương tác với SQLAlchemy
+from pydoc import text
 from flask import Flask, redirect, render_template, request, url_for
 from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy import Integer, String, DateTime, Select, and_, or_, func
+from sqlalchemy import Integer, String, DateTime, Select, and_, or_, func, text
 from sqlalchemy.orm import Mapped, mapped_column
 from datetime import datetime, timedelta
 
@@ -67,6 +68,8 @@ def delete_note_api(id: int) -> str:
     return "Nothing happened"
 
 
+# Khác với các truy vấn thêm, bớt, với các truy vấn 
+# chỉ lấy thông tin thì ta không cần commit
 @app.route("/", methods=["GET", "POST"]) 
 def index() -> str:
     if(request.method == "POST"):
@@ -81,7 +84,7 @@ def index() -> str:
     # cần lấy 1 số cột nhất định, để làm vậy ta thự hiện như sau:
     #
     # query: Select = db.select(Note.id, Note.info).order_by(Note.date)
-    # query_result: iter[ScalarResult] = db.session.execute(query)
+    # query_result: iter[Result] = db.session.execute(query)
     #
     # Ở trường hợp này thì ta chỉ lấy 2 cột của bảng note ra, lúc ấy
     # ta chỉ cần bỏ phương thức scalars do tác dụng của nó chỉ là lấy
@@ -95,7 +98,7 @@ def index() -> str:
 # Chạy lệnh sau để xem các truy vấn:
 # flask --app app_SQLAlchemy.py demo
 @app.cli.command("demo")
-def query_demo():
+def query_demo() -> None:
     # Lấy toàn bộ cột trong 1 bảng
     query1: Select = db.select(Note)
     print("Truy van 1:")
@@ -164,9 +167,27 @@ def query_demo():
     print(query7, '\n')
     # Đây là ví dụ thôi
 
+    # Ta cũng có thể tự tạo truy vấn và thực thi thay vì
+    # phải dựa vào các hàm có sẵn như trên
+    query8: str = "SELECT id, info, date FROM note;"
+    print("Truy van 8:")
+    print(query8, end = "\n\n")
+
+    # Nhớ là lúc thực hiện truy vấn thì ta phải đưa nó vào
+    # hàm text
+    result: iter[Result] = db.session.execute(text(query8))
+    
+    print("Ket qua:")
+    for note in result:
+        print("Note" + str(note.id) + ':')
+        print(note.info)
+        print("Datetime :", note.date)
+        print()
+
+
 
 @app.cli.command("init-db")
-def init_db():
+def init_db() -> None:
     with app.app_context():
         db.create_all()
 
