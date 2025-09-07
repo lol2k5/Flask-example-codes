@@ -8,25 +8,37 @@
 
 
 {% block body %}
-<nav>
-    <ul>
-        <li><a href="/login">Login</a></li>
-        <li><a href="/register">Create account</a></li>
-    </ul>
-</nav>
-<h1>Sign up</h1>
+<div class="nav">
+    <nav>
+        <ul>
+            <li><a href="/login">Login</a></li>
+            <li><a href="/register">Create account</a></li>
+        </ul>
+    </nav>
+</div>
 
-<form action="/register" method="POST">
-    <label for="username">Username:</label>
-    <input type="text" name="username" required />
-    <label for="email">Email:</label>
-    <input type="email" name="email" required />
-    <label for="password">Password:</label>
-    <input type="password" name="password" required />
-    <button type="submit">Sign Up</button>
-</form>
+<div class="section">
+    <div class="section-head">
+        <h1>Sign up</h1>
+    </div>
 
-{% if error %}
-<p class="error">{{ error }}</p>
-{% endif %}
+    <div class="section-register">
+        <form action="/register" method="POST">
+            <label for="username">Username:</label>
+            <input type="text" name="username" required />
+            <label for="email">Email:</label>
+            <input type="text" name="email" required />
+            <label for="password">Password:</label>
+            <input name="password" type="password" required minlength="12" maxlength="64"
+                pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z0-9])\S+"
+                title="Password must be at least 12 characters long, include uppercase, lowercase, a number, a special character, and contain no spaces.">
+            <button type="submit">Sign Up</button>
+        </form>
+
+        {% if error %}
+        <p class="error">{{ error }}</p>
+        {% endif %}
+        <p class="to-login">Have an account? Login <a href="/login">here</a>!</p>
+    </div>
+</div>
 {% endblock %}
