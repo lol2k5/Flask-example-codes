@@ -12,6 +12,9 @@
 <div class="nav">
     <ul>
         <li><a href="/logout">Logout</a></li>
+        {% if current_user.role_id == 1 %}
+        <li><a href="/users_list">Users list</a></li>
+        {% endif %}
     </ul>
 </div>
 
@@ -28,7 +31,7 @@
     <div class="section-change-email">
         <form action="/change_email" method="POST">
             <label for="email">Email:</label>
-            <input type="text" name="email" required />
+            <input type="email" name="email" required />
             <button type="submit">Change Email</button>
         </form>
 

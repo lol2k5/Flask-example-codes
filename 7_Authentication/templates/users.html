@@ -1,0 +1,45 @@
+{% extends "base.html" %} 
+
+
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='users.css') }}" />
+<title>Home</title>
+{% endblock %} 
+
+
+{% block body %}
+<div class="nav">
+    <ul>
+        <li><a href="/logout">Logout</a></li>
+        <li><a href="/">Home</a></li>
+    </ul>
+</div>
+
+<div class="section">
+    <div class="section-head">
+        <h1>Users list</h1>
+    </div>
+
+    <div class="section-list">
+        <table>
+            <thead class="list-head">
+                <th>Username</th>
+                <th>Contact</th>
+                <th></th>
+            </thead>
+
+            <tbody class="list-body">
+                {% for user in users_list %}
+                <tr>
+                    <td>{{ user.username }}</td>
+                    <td>{{ user.email }}</td>
+                    <td><button class="delete-btn" data-id="{{ user.id }}">Delete</button></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script src="{{ url_for('static', filename='users.js') }}"></script>
+{% endblock %}
