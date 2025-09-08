@@ -2,7 +2,7 @@
 
 
 {% block head %}
-<link rel="stylesheet" href="{{url_for('static', filename='style.css')}}" />
+<link rel="stylesheet" href="{{ url_for('static', filename='login.css') }}" />
 <title>Login</title>
 {% endblock %}
 
@@ -21,7 +21,6 @@
     <div class="section-head">
         <h1>Login</h1>
     </div>
-
 
     <div class="section-login">
         <form action="/login" method="POST">

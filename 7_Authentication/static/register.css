@@ -1,0 +1,20 @@
+.section-head h1 {
+    color: #d35400;
+}
+
+button[type="submit"] {
+    background: #e67e22;
+    color: #fff;
+}
+button[type="submit"]:hover {
+    background: #d35400;
+}
+
+.error {
+    color: #c0392b;
+    background: #fbeee6;
+}
+
+.to-login a {
+    color: #e67e22;
+}

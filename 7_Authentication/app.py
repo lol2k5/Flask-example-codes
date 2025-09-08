@@ -48,9 +48,14 @@ class Users(UserMixin, db.Model):
         # Dài ít nhất 12 kí tự
         # Có ít nhất 1 chữ cái hoa, 1 chữ cái thường
         # Có ít nhất 1 số
-        # Có ít nhất 1 kí tự đặc biệtbiệt
+        # Có ít nhất 1 kí tự đặc biệt
         pattern: str = r"^(?=.{12,}$)(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z0-9]).*$"
         return bool(match(pattern, password))
+
+# Khai báo truy vấn mà sẽ sử dụng sau này
+query_check_username: str = "SELECT id FROM users where username=:username;"
+query_check_email: str = "SELECT id FROM users where email=:email;"
+query_search_user: str = "SELECT * FROM users WHERE username=:username;"
 
 
 # Midderware để kiểm tra người dùng đã đăng nhập chưa
@@ -62,7 +67,7 @@ def check_login() -> str | None:
 
     # Nếu chưa nhưng đang cố gắng đến trang đăng nhâp hoặc
     # đăng kí thì cho qua
-    if(request.endpoint in {"login", "register"}):
+    if(request.endpoint in {"login", "register", "static", None}):
         return None
 
     # Các trường hợp còn lại thì đều chuyển hớp về trang 
@@ -86,10 +91,6 @@ def register() -> str:
             username: str = request.form.get("username")
             email: str = request.form.get("email")
             password: str = request.form.get("password")
-
-            # Khai báo truy vấn
-            query_check_username: str = "SELECT id FROM users where username=:username;"
-            query_check_email: str = "SELECT id FROM users where email=:email;"
 
             # Sử dụng truy vấn để tìm tên người dùng trùng
             # Nếu tìm thấy thì ép đăng nhập lại
@@ -130,9 +131,6 @@ def login() -> str:
             # Trường hợp người dùng có thông qua proxy để chỉnh sửa yêu cầu
             if(not username or not password):
                 raise ValueError("Username and password cannot be blank")
-
-            # Khai báo truy vấn tìm người dùng
-            query_search_user: str = "SELECT * FROM users WHERE username=:username;"
 
             # Ta phải truy vấn tất cả các cột vì cần phải
             # lấy 1 instance của người dùng đó, sau đó mới
@@ -177,6 +175,10 @@ def change_email() -> str:
         # Đầu tiên lấy email mới từ form
         new_email: str = request.form.get("email")
 
+        # Kiểm tra xem có ai lấy email này chưa"
+        if(db.session.execute(text(query_check_email).params(new_email)).first()):
+            return redirect(url_for("index", mess="The email has already been used by another user!"))
+
         # Sau đó lấy instance người dùng tương ứng
         user_to_update: Users = db.session.get(Users, current_user.id)
 
@@ -186,9 +188,9 @@ def change_email() -> str:
         # Gửi truy vấn cập nhật lên máy chủ
         db.session.commit()
     except ValueError as v:
-        return render_template("home.html", mess=v.args[0])
+        return redirect(url_for("index", mess=v.args[0]))
     
-    return render_template("home.html", mess="Email has been changed successfully!")
+    return redirect(url_for("index", mess="Email has been changed successfully!"))
 
 
 # Lệnh tạo csdl

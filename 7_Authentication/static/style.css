@@ -1,0 +1,107 @@
+body {
+    background: #f7f7f7;
+    font-family: 'Consolas', 'Courier New', monospace;
+    margin: 0;
+    padding: 0;
+}
+
+.section {
+    max-width: 400px;
+    margin: 60px auto;
+    background: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 6px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+    padding: 32px 28px;
+}
+
+.section-head h1 {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 22px;
+    letter-spacing: 1px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+label {
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 4px;
+}
+
+input[type="text"], input[type="password"] {
+    padding: 9px;
+    border-radius: 4px;
+    border: 1px solid #b2bec3;
+    font-size: 1rem;
+    background: #fafafa;
+    transition: border 0.2s;
+}
+input[type="text"]:focus, input[type="password"]:focus {
+    border: 1.5px solid #d35400;
+    outline: none;
+}
+
+button[type="submit"] {
+    border: none;
+    padding: 11px 0;
+    border-radius: 4px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: background 0.2s;
+    letter-spacing: 1px;
+}
+
+.error, .mess {
+    padding: 8px;
+    border-radius: 4px;
+    margin-top: 8px;
+    text-align: center;
+    border: 1px solid #e67e22;
+}
+
+.to-login, .to-register {
+    text-align: center;
+    margin-top: 14px;
+    color: #636e72;
+    font-size: 0.97rem;
+}
+.to-login a, .to-register a {
+    text-decoration: underline;
+}
+
+.nav {
+    background: #2c3e50;
+    padding: 10px 0;
+    margin-bottom: 30px;
+    border-radius: 0 0 6px 6px;
+}
+.nav ul {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+}
+.nav ul li {
+    display: inline;
+}
+.nav ul li a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 8px 16px;
+    border-radius: 4px;
+    transition: background 0.2s;
+}
+.nav ul li a:hover {
+    background: #d35400;
+}

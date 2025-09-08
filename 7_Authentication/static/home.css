@@ -1,0 +1,22 @@
+.section {
+    max-width: 600px;
+    padding: 38px 34px;
+}
+
+.section-head h1 {
+    color: #d35400;
+    font-size: 2.1rem;
+}
+
+.section-info {
+    font-size: 1.1rem;
+    color: #333;
+    margin-bottom: 18px;
+    text-align: center;
+}
+
+.mess {
+    color: #27ae60;
+    background: #eafaf1;
+    border: 1px solid #27ae60;
+}
