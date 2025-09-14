@@ -8,6 +8,7 @@ from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import Integer, String, ForeignKey, text
 from sqlalchemy.orm import Mapped, mapped_column, validates, relationship
 from sqlalchemy.engine import row
+from datetime import timedelta
 from email_validator import ValidatedEmail, validate_email, EmailNotValidError
 from re import match
 from flask_bcrypt import check_password_hash, generate_password_hash
@@ -25,6 +26,10 @@ login_manager: LoginManager = LoginManager()
 login_manager.init_app(app)
 login_manager.login_view = "login"
 
+# Quản lý phiên
+app.config["SESSION_COOKIE_SAMESITE"] = 'Lax'
+app.config["PERMANENT_SESSION_LIFETIME"] = timedelta(hours=1)
+# Ngoài ra còn tùy chỉnh 
 
 # Tạo model người dùng
 class Users(UserMixin, db.Model):
@@ -162,6 +167,13 @@ def login() -> str:
             # Nếu tìm thấy user và mã băm của mật khẩu đầu vào
             # khớp với trong cldl thì cho vào
             if(user and check_password_hash(user.password, password)):
+                # Clear session trước khi đăng kí
+                session.clear()
+
+                # Đặt giá trị này thành True để phiên hiện tại có tuổi thọ
+                session["permanent"] = True   
+
+                # Đăng nhập cho người dùng 
                 login_user(user)
                 return redirect(url_for("index"))
             else:
@@ -185,6 +197,7 @@ def index() -> str:
 @login_required
 def logout() -> str:
     logout_user()
+    session.clear()
     return redirect(url_for("login"))
 
 
