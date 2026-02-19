@@ -1,0 +1,9 @@
+body { background-color: #1a1a1a; font-family: monospace; color: #00ff00; }
+.ctf-zone {
+    border: 2px dashed #00ff00;
+    padding: 50px;
+    width: 60%;
+    margin: 50px auto;
+    text-align: center;
+}
+.ctf-zone a { color: #00ff00; }

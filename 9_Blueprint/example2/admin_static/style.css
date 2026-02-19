@@ -1,0 +1,10 @@
+body { background-color: #ecf0f1; font-family: sans-serif; }
+.admin-panel {
+    background-color: #e74c3c;
+    color: white;
+    padding: 50px;
+    border-radius: 10px;
+    width: 50%;
+    margin: 50px auto;
+}
+.admin-panel a { color: #fff; }
